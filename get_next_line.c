@@ -58,12 +58,12 @@ char *ft_extract_line(char *buffer)
 	int		len;
 	int		i;
 
+	i = 0;
 	if (!buffer[i])
 		return (NULL);
 	len = ft_strlen(buffer, '\n');
-	line = ft_calloc(i + 2, sizeof(char));
-	i = 0;
-	while (i <= len)
+	line = ft_calloc(len + 2, sizeof(char));
+	while (i < len)
 	{
 		line[i] = buffer [i];
 		i++;
@@ -119,8 +119,13 @@ int	main(void)
 	char	*a;
 
 	fd = open("test.txt", O_RDONLY);
-	while (a = get_next_line(fd))
-		printf("%s\n", a);
+	a = get_next_line(fd);
+	while (a != NULL)
+	{
+		printf("%s", a);
+		free(a);
+		a = get_next_line(fd);
+	}
 	// printf("%s\n", get_next_line(fd));
 	close(fd);
 	return (0);
