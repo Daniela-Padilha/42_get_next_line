@@ -52,7 +52,7 @@ char	*ft_read_file(int fd, char	*text)
 	return (text);
 }
 
-char *ft_extract_line(char *buffer)
+char	*ft_extract_line(char *buffer)
 {
 	char	*line;
 	int		len;
