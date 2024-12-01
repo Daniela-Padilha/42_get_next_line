@@ -72,7 +72,7 @@ char	*ft_extract_line(char *buffer)
 		line[i++] = '\n';
 	return (line);
 }
-char *ft_next_line(char *buffer)
+char	*ft_next_line(char *buffer)
 {
 	char	*line;
 	int		i;
