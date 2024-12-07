@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ddo-carm <ddo-carm@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/08 23:51:34 by ddo-carm          #+#    #+#             */
-/*   Updated: 2024/11/08 23:51:34 by ddo-carm         ###   ########.fr       */
+/*   Created: 2024/12/07 13:49:36 by ddo-carm          #+#    #+#             */
+/*   Updated: 2024/12/07 13:49:36 by ddo-carm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 //info    --> Returns a line read from the fd
 //fd      --> File descriptor
@@ -96,15 +96,15 @@ char	*ft_next_line(char *buffer)
 
 char	*get_next_line(int fd)
 {
-	static char	*buffer;
+	static char	*buffer[OPEN_MAX];
 	char		*line;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
-	buffer = ft_read_file(fd, buffer);
-	if (!buffer)
+	buffer[fd] = ft_read_file(fd, buffer[fd]);
+	if (!buffer[fd])
 		return (NULL);
-	line = ft_extract_line(buffer);
-	buffer = ft_next_line(buffer);
+	line = ft_extract_line(buffer[fd]);
+	buffer[fd] = ft_next_line(buffer[fd]);
 	return (line);
 }
