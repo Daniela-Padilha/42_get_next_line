@@ -67,7 +67,7 @@ char	*ft_extract_line(char *buffer)
 		return (NULL);
 	while (i < len)
 	{
-		line[i] = buffer [i];
+		line[i] = buffer[i];
 		i++;
 	}
 	if (buffer[i] == '\n')
