@@ -28,28 +28,28 @@ char	*ft_join_free(char *text, char *buffer)
 	return (new_text);
 }
 
-char	*ft_read_file(int fd, char	*text)
+char	*ft_read_file(int fd, char	*buffer)
 {
-	char	*buffer;
+	char	*tmp_buffer;
 	int		bytes_read;
 
-	if (!text)
-		text = ft_calloc(1, 1);
-	buffer = ft_calloc(BUFFER_SIZE + 1, sizeof(char));
 	if (!buffer)
-		return (free(text), NULL);
+		buffer = ft_calloc(1, 1);
+	tmp_buffer = ft_calloc(BUFFER_SIZE + 1, sizeof(char));
+	if (!tmp_buffer)
+		return (free(buffer), NULL);
 	bytes_read = 1;
 	while (bytes_read > 0)
 	{
-		bytes_read = read(fd, buffer, BUFFER_SIZE * sizeof(char));
+		bytes_read = read(fd, tmp_buffer, BUFFER_SIZE * sizeof(char));
 		if (bytes_read == -1)
-			return (free(buffer), free(text), NULL);
-		buffer[bytes_read] = '\0';
-		text = ft_join_free(text, buffer);
-		if (ft_strchr(buffer, '\n'))
+			return (free(tmp_buffer), free(buffer), NULL);
+		tmp_buffer[bytes_read] = '\0';
+		buffer = ft_join_free(buffer, tmp_buffer);
+		if (ft_strchr(tmp_buffer, '\n'))
 			break ;
 	}
-	return (free(buffer), text);
+	return (free(tmp_buffer), buffer);
 }
 
 char	*ft_extract_line(char *buffer)
