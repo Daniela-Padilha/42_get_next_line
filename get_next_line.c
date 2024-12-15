@@ -17,15 +17,15 @@
 //return  --> Success (line read)
 //return  --> Faillure (NULL)
 
-char	*ft_join_free(char *text, char *buffer)
+char	*ft_join_free(char *buffer, char *tmp_buffer)
 {
-	char	*new_text;
+	char	*new_buffer;
 
-	new_text = ft_strjoin(text, buffer);
-	if (!new_text)
-		return (free(buffer), free(text), NULL);
-	free(text);
-	return (new_text);
+	new_buffer = ft_strjoin(buffer, tmp_buffer);
+	if (!new_buffer)
+		return (free(tmp_buffer), free(buffer), NULL);
+	free(buffer);
+	return (new_buffer);
 }
 
 char	*ft_read_file(int fd, char	*buffer)
