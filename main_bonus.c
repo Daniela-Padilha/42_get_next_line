@@ -3,9 +3,9 @@
 
 int	main(void)
 {
-	int		fd1;
-	int		fd2;
-	int		fd3;
+	int		fd1 = 1;
+	int		fd2 = 1;
+	int		fd3 = 1;
 	char	*line1;
 	char	*line2;
 	char	*line3;
@@ -31,11 +31,11 @@ int	main(void)
 		close(fd2);
 		return (1);
 	}
-	line1 = get_next_line(fd1);
-	line2 = get_next_line(fd2);
-	line3 = get_next_line(fd3);
-	while (line1 || line2 || line3)
+	while (fd1 > 0 || fd2 > 0 || fd3 > 0)
 	{
+		line1 = get_next_line(fd1);
+		line2 = get_next_line(fd2);
+		line3 = get_next_line(fd3);
 		if (line1)
 		{
 			printf("File 1: %s", line1);
@@ -51,6 +51,8 @@ int	main(void)
 			printf("File 3: %s", line3);
 			free(line3);
 		}
+		if (!line1 && !line2 && !line3)
+			break ;
 	}
 	close(fd1);
 	close(fd2);
